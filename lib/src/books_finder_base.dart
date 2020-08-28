@@ -32,6 +32,8 @@ import 'dart:convert';
 import 'scripts/books.dart';
 import 'package:http/http.dart' as http;
 
+export 'scripts/books.dart';
+
 /// Query a list of books
 ///
 /// `query` parameter must not be null and must not be empty.
