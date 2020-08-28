@@ -13,4 +13,4 @@ build/
 doc/api/
 
 test/
-.vscode/
+.vscode
