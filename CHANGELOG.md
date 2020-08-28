@@ -1,3 +1,6 @@
+## 1.0.2+1
+- Hotfix startIndex issue
+
 ## 1.0.2
 - Export the book object
 

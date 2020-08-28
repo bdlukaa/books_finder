@@ -80,7 +80,7 @@ Future<List<Book>> queryBooks(
   assert(maxResults <= 40);
 
   startIndex ??= 0;
-  assert(startIndex != 0);
+  assert(startIndex >= 0);
   assert(!startIndex.isNegative);
   assert(startIndex <= maxResults);
 
