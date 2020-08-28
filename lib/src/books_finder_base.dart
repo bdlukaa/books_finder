@@ -101,6 +101,7 @@ Future<List<Book>> queryBooks(
   if (result.statusCode == 200) {
     final books = <Book>[];
     final list = (jsonDecode(result.body))['items'] as List<dynamic>;
+    if (list == null) return [];
     list.forEach((e) {
       books.add(Book.fromJson(e));
     });

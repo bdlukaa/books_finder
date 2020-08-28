@@ -1,3 +1,6 @@
+## 1.0.2+2
+- hotfix book not found
+
 ## 1.0.2+1
 - Hotfix startIndex issue
 
