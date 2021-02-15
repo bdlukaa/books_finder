@@ -1,14 +1,14 @@
 name: books_finder
 description: A library to help on the search for books on google books api
-version: 1.0.2+2
-homepage: https://github.com/bdlukaa/books_finder
+version: 2.0.0
 repository: https://github.com/bdlukaa/books_finder
 
 environment:
-  sdk: '>=2.8.1 <3.0.0'
+  sdk: ">=2.8.1 <3.0.0"
 
 dependencies:
   http: ^0.12.2
+  meta: ^1.2.4
 
 dev_dependencies:
   pedantic: ^1.9.0

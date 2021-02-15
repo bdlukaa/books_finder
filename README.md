@@ -1,16 +1,42 @@
-A library to help on the search for books on [google books api](https://developers.google.com/books/docs/v1/using).
+<div>
+  <h1 align="center">books_finder</h1>
+  <p align="center" >
+    <a title="Discord" href="https://discord.gg/674gpDQUVq">
+      <img src="https://img.shields.io/discord/809528329337962516?label=discord&logo=discord" />
+    </a>
+    <a title="Pub" href="https://pub.dartlang.org/packages/books_finder" >
+      <img src="https://img.shields.io/pub/v/books_finder.svg?style=popout&include_prereleases" />
+    </a>
+    <a title="Github License">
+      <img src="https://img.shields.io/github/license/bdlukaa/books_finder" />
+    </a>
+    <a title="PRs are welcome">
+      <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" />
+    </a>
+  <div>
+  <p align="center">
+    <a title="Buy me a coffee" href="https://www.buymeacoffee.com/bdlukaa">
+      <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=bdlukaa&button_colour=FF5F5F&font_colour=ffffff&font_family=Lato&outline_colour=000000&coffee_colour=FFDD00">
+    </a>
+  </p>
+</div>
 
-# Querying books
+A library to help on the search for books on the [Google Books Api](https://developers.google.com/books/docs/v1/using).
+
+## Usage
 
 First of all, import the library:
-``` dart
+
+```dart
 import 'package:books_finder/books_finder.dart';
 ```
 
-To query a book, just call the function `queryBooks`:
+### Querying books
 
-``` dart
-final books = await queryBooks(
+To query books, just call the function `queryBooks`:
+
+```dart
+final List<Book> books = await queryBooks(
  'twilight',
  maxResults: 3,
  printType: PrintType.books,
@@ -20,43 +46,40 @@ final books = await queryBooks(
 
 You can change a few parameters to make your query more specific:
 
-1. Set `langRestrict` to restrict the query to a
-specific language
-2. Set `orderBy` to order the query by newest or relevance
-and `printType` to filter in books or magazines
-3. Set `maxResults` to set the max amount of results.
-4. Set `startIndex` for pagination
+| Parameter    | Description                              | Nullable |
+| ------------ | ---------------------------------------- | -------- |
+| maxResults   | Set the max amount of results            | No       |
+| startIndex   | for pagination                           | No       |
+| langRestrict | Retrict the query to a specific language | Yes      |
+| orderBy      | Order the query by newest or relevance   | Yes      |
+| printType    | Filter by books, magazines or both       | Yes      |
 
-# Specific books
-First of all, to get a specific book, you need its id. You can get the book id by querying the name of it and calling `book.id`.
+### Books
 
-Next step is to get the book. To get it, just call the function `getSpecificBook`. For example:
+If you already have a `Book` object, you can call `book.info` to get all the book infos:
 
-``` dart
-final specificBook = await getSpecificBook(book.id);
+```dart
+final info = book.info;
 ```
 
-But if you already have a `book` object, you can just call:
-``` dart
-final completeInfo = await book.completeInfoBook;
-```
+| Parameter                             | Description                                 |
+| ------------------------------------- | ------------------------------------------- |
+| title (`String`)                      | Title of the book                           |
+| authors (`List<String>`)              | All the authors names                       |
+| publisher (`String`)                  | The publisher name                          |
+| publishedDate (`DateTime`)            | The date it was published                   |
+| description (`String`)                | Description of the book                     |
+| pageCount (`int`)                     | The amount of pages                         |
+| categories (`List<String>`)           | The categories the book is in               |
+| averageRating (`double`)              | The average rating of the book              |
+| ratingsCount (`int`)                  | The amount of people that rated it          |
+| maturityRating (`String`)             | The maturity rating                         |
+| contentVersion (`String`)             | The version of the content                  |
+| imageLinks (`List<Map<String, Uri>>`) | The links with the avaiable image resources |
+| language (`String`)                   | The language code of the book               |
 
-# Books
-If you already have a `Book` object, you can call `book.info` to get all the book infos.
+## Issues and feedback
 
-- title: returns a `String` with the title of the book
-- authors: returns a `list of strings` with all the authors names
-- publisher: returns a `String` with the publisher name
-- publishedDate: returns a `DateTime` with the published date
-- description: returns a `String` with the description of the book
-- pageCount: returns a `int` with the amount of pages the book has
-- categories: returns a `list of strings` with the categories the book is in
-- averageRating: returns a `double` with the average rating of the book
-- ratingsCount: returns a `int` with the amount of people that rated the book
-- maturityRating: returns a `String` with the maturity rating of the book
-- contentVersion: returns a `String` with the content version
-- imageLinks: returns a `List<Map<String, Uri>>` with all the avaiable image resources urls
-- language: returns a `String` with the language code of the book
+Please file issues, bugs, or feature requests in our [issue tracker](https://github.com/bdlukaa/books_finder/issues/new).
 
-### Open source
-This project is open source and is under BSD LICENCE. Feel free to [open an issue](https://github.com/bdlukaa/books_finder/issues) or [make a pull request](https://github.com/bdlukaa/books_finder/pulls) to the project.
+To contribute a change to this plugin open a [pull request](https://github.com/bdlukaa/books_finder/pulls).
