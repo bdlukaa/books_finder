@@ -1,5 +1,9 @@
 Date format: DD/MM/YYYY
 
+## 2.0.1 - [15/02/2021]
+
+- Internal fixes
+
 ## 2.0.0 - [15/02/2021]
 
 - **BREAKING**: Removed `completeInfoBook` (it was redundant)
