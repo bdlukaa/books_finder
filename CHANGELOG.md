@@ -1,5 +1,9 @@
 Date format: DD/MM/YYYY
 
+## 2.0.0-nullsafety
+
+- Null safe version
+
 ## 2.0.0 - [15/02/2021]
 
 - **BREAKING**: Removed `completeInfoBook` (it was redundant)
