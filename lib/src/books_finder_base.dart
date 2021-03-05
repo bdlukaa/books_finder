@@ -38,23 +38,14 @@ export 'scripts/books.dart';
 ///
 Future<List<Book>> queryBooks(
   String query, {
-  String langRestrict,
+  String? langRestrict,
   int maxResults = 10,
-  OrderBy orderBy,
-  PrintType printType = PrintType.all,
+  OrderBy? orderBy,
+  PrintType? printType = PrintType.all,
   int startIndex = 0,
 }) async {
-  assert(query != null);
   assert(query.isNotEmpty);
 
-  maxResults ??= 10;
-  assert(maxResults != 0);
-  assert(maxResults > 0);
-  assert(maxResults <= 40);
-
-  startIndex ??= 0;
-  assert(startIndex >= 0);
-  assert(!startIndex.isNegative);
   // assert(startIndex <= maxResults);
 
   var q = 'https://www.googleapis.com/books/v1/volumes?q=' +
@@ -62,15 +53,16 @@ Future<List<Book>> queryBooks(
       '&maxResults=$maxResults';
 
   if (langRestrict != null) q += '&langRestrict=$langRestrict';
-  if (orderBy != null)
+  if (orderBy != null) {
     q += '&orderBy=${orderBy.toString().replaceAll('OrderBy.', '')}';
-  if (printType != null)
+  }
+  if (printType != null) {
     q += '&printType=${printType.toString().replaceAll('PrintType.', '')}';
-
-  final result = await http.get(q);
+  }
+  final result = await http.get(Uri.parse(q));
   if (result.statusCode == 200) {
     final books = <Book>[];
-    final list = (jsonDecode(result.body))['items'] as List<dynamic>;
+    final list = (jsonDecode(result.body))['items'] as List<dynamic>?;
     if (list == null) return [];
     list.forEach((e) {
       books.add(Book.fromJson(e));
@@ -106,9 +98,9 @@ enum PrintType {
 /// Get an specific book with its `id`.
 /// You can not add specific parameters to this.
 Future<Book> getSpecificBook(String id) async {
-  assert(id != null && id.isNotEmpty, 'You must provide a valid id');
+  assert(id.isNotEmpty, 'You must provide a valid id');
   final q = 'https://www.googleapis.com/books/v1/volumes/${id.trim()}';
-  final result = await http.get(q);
+  final result = await http.get(Uri.parse(q));
   if (result.statusCode == 200) {
     return Book.fromJson(jsonDecode(result.body) as Map<String, dynamic>);
   } else {

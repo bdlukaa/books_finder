@@ -1,29 +1,26 @@
 //  Copyright 2020 Bruno D'Luka
-import 'package:meta/meta.dart';
-
 import 'extensions.dart';
 
 class Book {
   /// The id of the book
   final String id;
-  final String etag;
+  final String? etag;
 
   /// A self link containing more especific information
-  final Uri selfLink;
+  final Uri? selfLink;
 
   /// The informations about the book
   final BookInfo info;
 
   const Book({
-    @required this.id,
+    required this.id,
     this.etag,
-    @required this.info,
+    required this.info,
     this.selfLink,
-  })  : assert(id != null),
-        assert(info != null);
+  });
 
   @override
-  String toString() => '$id:${info?.title}';
+  String toString() => '$id:${info.title}';
 
   static Book fromJson(Map<String, dynamic> json) {
     return Book(
@@ -76,41 +73,41 @@ class BookInfo {
   final String language;
 
   const BookInfo({
-    this.title,
-    this.authors,
-    this.publisher,
-    this.averageRating,
-    this.categories,
-    this.contentVersion,
-    this.description,
-    this.imageLinks,
-    this.language,
-    this.maturityRating,
-    this.pageCount,
-    this.publishedDate,
-    this.ratingsCount,
+    required this.title,
+    required this.authors,
+    required this.publisher,
+    required this.averageRating,
+    required this.categories,
+    required this.contentVersion,
+    required this.description,
+    required this.imageLinks,
+    required this.language,
+    required this.maturityRating,
+    required this.pageCount,
+    required this.publishedDate,
+    required this.ratingsCount,
   });
 
   static BookInfo fromJson(Map<String, dynamic> json) {
     final publisherDateArray =
-        (json['publisherDate'] as String ?? '0000-00-00').split('-');
+        ((json['publisherDate'] as String?) ?? '0000-00-00').split('-');
     final year = int.parse(publisherDateArray[0]);
     final month = int.parse(publisherDateArray[1]);
     final day = int.parse(publisherDateArray[2]);
     final publisherDate = DateTime(year, month, day);
 
     final imageLinks = <String, Uri>{};
-    final map = json['imageLinks'] as Map<String, dynamic>;
+    final map = json['imageLinks'] as Map<String, dynamic>?;
     map?.forEach((key, value) {
       imageLinks.addAll({key: Uri.parse(value.toString())});
     });
 
     return BookInfo(
       title: json['title'],
-      authors: ((json['authors'] as List<dynamic>) ?? []).toStringList(),
+      authors: ((json['authors'] as List<dynamic>?) ?? []).toStringList(),
       publisher: json['publisher'],
       averageRating: ((json['averageRating'] ?? 0) as num).toDouble(),
-      categories: ((json['categories'] as List<dynamic>) ?? []).toStringList(),
+      categories: ((json['categories'] as List<dynamic>?) ?? []).toStringList(),
       contentVersion: json['contentVersion'],
       description: json['description'],
       language: json['language'],
