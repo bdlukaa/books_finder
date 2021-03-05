@@ -1,6 +1,6 @@
 Date format: DD/MM/YYYY
 
-## 2.0.0-nullsafety
+## 3.0.0 - Null Safety - [04/03/2021]
 
 - Null safe version
 
