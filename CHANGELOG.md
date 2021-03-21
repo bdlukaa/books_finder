@@ -16,26 +16,26 @@ Date format: DD/MM/YYYY
 - Formatted files
 - Upgraded depedencies
 
-## 1.0.2+4 - [28/08/2021]
+## 1.0.2+4 - [28/08/2020]
 
 - Hotfix startIndex and maxResults conflict issue
 
-## 1.0.2+3 - [28/08/2021]
+## 1.0.2+3 - [28/08/2020]
 
 - hotfix thumbnail in a map
 
-## 1.0.2+2 - [28/08/2021]
+## 1.0.2+2 - [28/08/2020]
 
 - hotfix book not found
 
-## 1.0.2+1 - [28/08/2021]
+## 1.0.2+1 - [28/08/2020]
 
 - Hotfix startIndex issue
 
-## 1.0.2 - [27/08/2021]
+## 1.0.2 - [27/08/2020]
 
 - Export the book object
 
-## 1.0.1 - [27/08/2021]
+## 1.0.1 - [27/08/2020]
 
 - First version
