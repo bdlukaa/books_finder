@@ -89,12 +89,12 @@ class BookInfo {
   });
 
   static BookInfo fromJson(Map<String, dynamic> json) {
-    final publisherDateArray =
-        ((json['publisherDate'] as String?) ?? '0000-00-00').split('-');
-    final year = int.parse(publisherDateArray[0]);
-    final month = int.parse(publisherDateArray[1]);
-    final day = int.parse(publisherDateArray[2]);
-    final publisherDate = DateTime(year, month, day);
+    final publishedDateArray =
+        ((json['publishedDate'] as String?) ?? '0000-00-00').split('-');
+    final year = int.parse(publishedDateArray[0]);
+    final month = int.parse(publishedDateArray[1]);
+    final day = int.parse(publishedDateArray[2]);
+    final publishedDate = DateTime(year, month, day);
 
     final imageLinks = <String, Uri>{};
     final map = json['imageLinks'] as Map<String, dynamic>?;
@@ -114,7 +114,7 @@ class BookInfo {
       maturityRating: json['maturityRating'],
       pageCount: json['pageCount'] ?? 0,
       ratingsCount: json['ratingsCount'] ?? 0,
-      publishedDate: publisherDate,
+      publishedDate: publishedDate,
       imageLinks: imageLinks,
     );
   }
