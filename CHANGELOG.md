@@ -1,5 +1,9 @@
 Date format: DD/MM/YYYY
 
+## 3.1.0 - [21/03/2021]
+
+- **FIX** `publisherDate` wasn't found in google books api json. (Merged [#4](https://github.com/bdlukaa/books_finder/pull/4) from [JimTim](https://github.com/JimTim))
+
 ## 3.0.0 - Null Safety - [04/03/2021]
 
 - Null safe version
