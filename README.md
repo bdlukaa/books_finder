@@ -68,6 +68,7 @@ final info = book.info;
 | authors (`List<String>`)              | All the authors names                       |
 | publisher (`String`)                  | The publisher name                          |
 | publishedDate (`DateTime`)            | The date it was published                   |
+| rawPublishedDate (`String`)           | The date it was published in raw format     |
 | description (`String`)                | Description of the book                     |
 | pageCount (`int`)                     | The amount of pages                         |
 | categories (`List<String>`)           | The categories the book is in               |
