@@ -45,6 +45,9 @@ class BookInfo {
   /// The date the book was published
   final DateTime publishedDate;
 
+  /// The date the book was published in raw string format
+  final String rawPublishedDate;
+
   /// The description of the book
   final String description;
 
@@ -85,16 +88,42 @@ class BookInfo {
     required this.maturityRating,
     required this.pageCount,
     required this.publishedDate,
+    required this.rawPublishedDate,
     required this.ratingsCount,
   });
 
   static BookInfo fromJson(Map<String, dynamic> json) {
     final publishedDateArray =
         ((json['publishedDate'] as String?) ?? '0000-00-00').split('-');
-    final year = int.parse(publishedDateArray[0]);
-    final month = int.parse(publishedDateArray[1]);
-    final day = int.parse(publishedDateArray[2]);
-    final publishedDate = DateTime(year, month, day);
+
+    // initialize date
+    int year = 0;
+    int month = 1;
+    int day = 1;
+
+    // now test the date string
+    if(publishedDateArray.length==1) {
+      // assume we have only the year
+      year = int.parse(publishedDateArray[0]);
+    }
+    if(publishedDateArray.length==2) {
+      // assume we have the year and maybe the month (this could be just a speculative case)
+      year = int.parse(publishedDateArray[0]);
+      month = int.parse(publishedDateArray[1]);
+    }
+    if(publishedDateArray.length==3) {
+      // assume we have year-month-day
+      year = int.parse(publishedDateArray[0]);
+      month = int.parse(publishedDateArray[1]);
+      day = int.parse(publishedDateArray[2]);
+    }
+
+    // initialize datetime variable
+    DateTime publishedDate = DateTime(0);
+    if(publishedDateArray.length>0) {
+      publishedDate = DateTime(year, month, day);
+    }
+
 
     final imageLinks = <String, Uri>{};
     final map = json['imageLinks'] as Map<String, dynamic>?;
@@ -115,6 +144,7 @@ class BookInfo {
       pageCount: json['pageCount'] ?? 0,
       ratingsCount: json['ratingsCount'] ?? 0,
       publishedDate: publishedDate,
+      rawPublishedDate: (json['publishedDate'] as String?) ?? '',
       imageLinks: imageLinks,
     );
   }
@@ -126,6 +156,7 @@ class BookInfo {
     authors: $authors
     publisher: $publisher
     publishedDate: $publishedDate
+    rawPublishedDate: $rawPublishedDate
     averageRating: $averageRating
     categories: $categories
     contentVersion $contentVersion
