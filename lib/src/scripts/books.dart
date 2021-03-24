@@ -1,4 +1,6 @@
 //  Copyright 2020 Bruno D'Luka
+import 'dart:convert';
+
 import 'extensions.dart';
 
 class Book {
@@ -28,6 +30,27 @@ class Book {
       etag: json['etag'],
       info: BookInfo.fromJson(json['volumeInfo']),
       selfLink: Uri.parse(json['selfLink']),
+    );
+  }
+}
+
+class IndustryIdentifier {
+  final String type;
+  final String identifier;
+
+
+  const IndustryIdentifier({
+    required this.type,
+    required this.identifier,
+  });
+
+  @override
+  String toString() => '$type:$identifier';
+
+  static IndustryIdentifier fromJson(Map<String, dynamic> json) {
+    return IndustryIdentifier(
+      type: json['type']??'',
+      identifier: json['identifier']??'',
     );
   }
 }
@@ -75,6 +98,9 @@ class BookInfo {
   /// The original language of the book
   final String language;
 
+  /// The industryIdentifiers of the book (isbn)
+  final List<IndustryIdentifier> industryIdentifier;
+
   const BookInfo({
     required this.title,
     required this.authors,
@@ -90,6 +116,7 @@ class BookInfo {
     required this.publishedDate,
     required this.rawPublishedDate,
     required this.ratingsCount,
+    required this.industryIdentifier,
   });
 
   static BookInfo fromJson(Map<String, dynamic> json) {
@@ -132,20 +159,21 @@ class BookInfo {
     });
 
     return BookInfo(
-      title: json['title'],
+      title: json['title']??'',
       authors: ((json['authors'] as List<dynamic>?) ?? []).toStringList(),
-      publisher: json['publisher'],
+      publisher: json['publisher']??'',
       averageRating: ((json['averageRating'] ?? 0) as num).toDouble(),
       categories: ((json['categories'] as List<dynamic>?) ?? []).toStringList(),
-      contentVersion: json['contentVersion'],
-      description: json['description'],
-      language: json['language'],
-      maturityRating: json['maturityRating'],
+      contentVersion: json['contentVersion']??'',
+      description: json['description']??'',
+      language: json['language']??'',
+      maturityRating: json['maturityRating'] ??'',
       pageCount: json['pageCount'] ?? 0,
       ratingsCount: json['ratingsCount'] ?? 0,
       publishedDate: publishedDate,
       rawPublishedDate: (json['publishedDate'] as String?) ?? '',
       imageLinks: imageLinks,
+      industryIdentifier: (json['industryIdentifiers'] as List).map((industryIdentifier) => IndustryIdentifier.fromJson(industryIdentifier)).toList(),
     );
   }
 
