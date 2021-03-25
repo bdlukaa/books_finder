@@ -173,7 +173,7 @@ class BookInfo {
       publishedDate: publishedDate,
       rawPublishedDate: (json['publishedDate'] as String?) ?? '',
       imageLinks: imageLinks,
-      industryIdentifier: (json['industryIdentifiers'] as List).map((industryIdentifier) => IndustryIdentifier.fromJson(industryIdentifier)).toList(),
+      industryIdentifier: ((json['industryIdentifiers']??[]) as List).map((industryIdentifier) => IndustryIdentifier.fromJson(industryIdentifier)).toList(),
     );
   }
 
