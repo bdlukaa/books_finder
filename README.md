@@ -76,6 +76,7 @@ final info = book.info;
 | ratingsCount (`int`)                  | The amount of people that rated it          |
 | maturityRating (`String`)             | The maturity rating                         |
 | contentVersion (`String`)             | The version of the content                  |
+| industryIdentifier (`List<IndustryIdentifier>`)| The identifiers of the book (isbn) |
 | imageLinks (`List<Map<String, Uri>>`) | The links with the avaiable image resources |
 | language (`String`)                   | The language code of the book               |
 
