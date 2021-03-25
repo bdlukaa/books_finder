@@ -1,6 +1,4 @@
 //  Copyright 2020 Bruno D'Luka
-import 'dart:convert';
-
 import 'extensions.dart';
 
 class Book {
@@ -66,7 +64,7 @@ class BookInfo {
   final String publisher;
 
   /// The date the book was published
-  final DateTime publishedDate;
+  final DateTime? publishedDate;
 
   /// The date the book was published in raw string format
   final String rawPublishedDate;
@@ -146,7 +144,7 @@ class BookInfo {
     }
 
     // initialize datetime variable
-    DateTime publishedDate = DateTime(0);
+    DateTime? publishedDate = null;
     if(publishedDateArray.length>0) {
       publishedDate = DateTime(year, month, day);
     }
