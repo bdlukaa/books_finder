@@ -4,7 +4,7 @@ version: 4.0.0
 repository: https://github.com/bdlukaa/books_finder
 
 environment:
-  sdk: ">=2.12.0-0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   http: ^0.13.0
