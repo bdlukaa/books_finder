@@ -32,6 +32,27 @@ class Book {
   }
 }
 
+class IndustryIdentifier {
+  final String type;
+  final String identifier;
+
+
+  const IndustryIdentifier({
+    required this.type,
+    required this.identifier,
+  });
+
+  @override
+  String toString() => '$type:$identifier';
+
+  static IndustryIdentifier fromJson(Map<String, dynamic> json) {
+    return IndustryIdentifier(
+      type: json['type']??'',
+      identifier: json['identifier']??'',
+    );
+  }
+}
+
 class BookInfo {
   /// The book title
   final String title;
@@ -43,7 +64,10 @@ class BookInfo {
   final String publisher;
 
   /// The date the book was published
-  final DateTime publishedDate;
+  final DateTime? publishedDate;
+
+  /// The date the book was published in raw string format
+  final String rawPublishedDate;
 
   /// The description of the book
   final String description;
@@ -72,6 +96,9 @@ class BookInfo {
   /// The original language of the book
   final String language;
 
+  /// The industryIdentifiers of the book (isbn)
+  final List<IndustryIdentifier> industryIdentifier;
+
   const BookInfo({
     required this.title,
     required this.authors,
@@ -85,16 +112,43 @@ class BookInfo {
     required this.maturityRating,
     required this.pageCount,
     required this.publishedDate,
+    required this.rawPublishedDate,
     required this.ratingsCount,
+    required this.industryIdentifier,
   });
 
   static BookInfo fromJson(Map<String, dynamic> json) {
     final publishedDateArray =
         ((json['publishedDate'] as String?) ?? '0000-00-00').split('-');
-    final year = int.parse(publishedDateArray[0]);
-    final month = int.parse(publishedDateArray[1]);
-    final day = int.parse(publishedDateArray[2]);
-    final publishedDate = DateTime(year, month, day);
+
+    // initialize date
+    int year = 0;
+    int month = 1;
+    int day = 1;
+
+    // now test the date string
+    if(publishedDateArray.length==1) {
+      // assume we have only the year
+      year = int.parse(publishedDateArray[0]);
+    }
+    if(publishedDateArray.length==2) {
+      // assume we have the year and maybe the month (this could be just a speculative case)
+      year = int.parse(publishedDateArray[0]);
+      month = int.parse(publishedDateArray[1]);
+    }
+    if(publishedDateArray.length==3) {
+      // assume we have year-month-day
+      year = int.parse(publishedDateArray[0]);
+      month = int.parse(publishedDateArray[1]);
+      day = int.parse(publishedDateArray[2]);
+    }
+
+    // initialize datetime variable
+    DateTime? publishedDate = null;
+    if(publishedDateArray.length>0) {
+      publishedDate = DateTime(year, month, day);
+    }
+
 
     final imageLinks = <String, Uri>{};
     final map = json['imageLinks'] as Map<String, dynamic>?;
@@ -103,19 +157,21 @@ class BookInfo {
     });
 
     return BookInfo(
-      title: json['title'],
+      title: json['title']??'',
       authors: ((json['authors'] as List<dynamic>?) ?? []).toStringList(),
-      publisher: json['publisher'],
+      publisher: json['publisher']??'',
       averageRating: ((json['averageRating'] ?? 0) as num).toDouble(),
       categories: ((json['categories'] as List<dynamic>?) ?? []).toStringList(),
-      contentVersion: json['contentVersion'],
-      description: json['description'],
-      language: json['language'],
-      maturityRating: json['maturityRating'],
+      contentVersion: json['contentVersion']??'',
+      description: json['description']??'',
+      language: json['language']??'',
+      maturityRating: json['maturityRating'] ??'',
       pageCount: json['pageCount'] ?? 0,
       ratingsCount: json['ratingsCount'] ?? 0,
       publishedDate: publishedDate,
+      rawPublishedDate: (json['publishedDate'] as String?) ?? '',
       imageLinks: imageLinks,
+      industryIdentifier: ((json['industryIdentifiers']??[]) as List).map((industryIdentifier) => IndustryIdentifier.fromJson(industryIdentifier)).toList(),
     );
   }
 
@@ -126,6 +182,7 @@ class BookInfo {
     authors: $authors
     publisher: $publisher
     publishedDate: $publishedDate
+    rawPublishedDate: $rawPublishedDate
     averageRating: $averageRating
     categories: $categories
     contentVersion $contentVersion
