@@ -1,5 +1,10 @@
 Date format: DD/MM/YYYY
 
+## 4.0.0 - [25/03/2021]
+
+- **NEW** `IndustryIdentifier`
+- **NEW** Tests
+
 ## 3.1.0 - [21/03/2021]
 
 - **FIX** `publisherDate` wasn't found in google books api json. (Merged [#4](https://github.com/bdlukaa/books_finder/pull/4) from [JimTim](https://github.com/JimTim))

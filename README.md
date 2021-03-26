@@ -62,23 +62,27 @@ If you already have a `Book` object, you can call `book.info` to get all the boo
 final info = book.info;
 ```
 
-| Parameter                             | Description                                 |
-| ------------------------------------- | ------------------------------------------- |
-| title (`String`)                      | Title of the book                           |
-| authors (`List<String>`)              | All the authors names                       |
-| publisher (`String`)                  | The publisher name                          |
-| publishedDate (`DateTime`)            | The date it was published                   |
-| rawPublishedDate (`String`)           | The date it was published in raw format     |
-| description (`String`)                | Description of the book                     |
-| pageCount (`int`)                     | The amount of pages                         |
-| categories (`List<String>`)           | The categories the book is in               |
-| averageRating (`double`)              | The average rating of the book              |
-| ratingsCount (`int`)                  | The amount of people that rated it          |
-| maturityRating (`String`)             | The maturity rating                         |
-| contentVersion (`String`)             | The version of the content                  |
-| industryIdentifier (`List<IndustryIdentifier>`)| The identifiers of the book (isbn) |
-| imageLinks (`List<Map<String, Uri>>`) | The links with the avaiable image resources |
-| language (`String`)                   | The language code of the book               |
+| Parameter                                       | Description                                 |
+| ----------------------------------------------- | ------------------------------------------- |
+| title (`String`)                                | Title of the book                           |
+| authors (`List<String>`)                        | All the authors names                       |
+| publisher (`String`)                            | The publisher name                          |
+| publishedDate (`DateTime`)                      | The date it was published                   |
+| rawPublishedDate (`String`)                     | The date it was published in raw format     |
+| description (`String`)                          | Description of the book                     |
+| pageCount (`int`)                               | The amount of pages                         |
+| categories (`List<String>`)                     | The categories the book is in               |
+| averageRating (`double`)                        | The average rating of the book              |
+| ratingsCount (`int`)                            | The amount of people that rated it          |
+| maturityRating (`String`)                       | The maturity rating                         |
+| contentVersion (`String`)                       | The version of the content                  |
+| industryIdentifier (`List<IndustryIdentifier>`) | The identifiers of the book (isbn)          |
+| imageLinks (`List<Map<String, Uri>>`)           | The links with the avaiable image resources |
+| language (`String`)                             | The language code of the book               |
+
+## Acknowledgements
+
+- [@JimTim](https://github.com/JimTim) for industry identifiers and tests
 
 ## Issues and feedback
 
