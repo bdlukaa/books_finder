@@ -1,5 +1,9 @@
 Date format: DD/MM/YYYY
 
+## 4.1.0 - [02/03/2021]
+
+- **NEW** `reschemeImageLinks`
+
 ## 4.0.0 - [25/03/2021]
 
 - **NEW** `IndustryIdentifier`

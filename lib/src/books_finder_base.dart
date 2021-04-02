@@ -43,6 +43,7 @@ Future<List<Book>> queryBooks(
   OrderBy? orderBy,
   PrintType? printType = PrintType.all,
   int startIndex = 0,
+  bool reschemeImageLinks = false,
 }) async {
   assert(query.isNotEmpty);
 
@@ -65,7 +66,7 @@ Future<List<Book>> queryBooks(
     final list = (jsonDecode(result.body))['items'] as List<dynamic>?;
     if (list == null) return [];
     list.forEach((e) {
-      books.add(Book.fromJson(e));
+      books.add(Book.fromJson(e, reschemeImageLinks: reschemeImageLinks));
     });
     return books;
   } else {
@@ -97,12 +98,18 @@ enum PrintType {
 
 /// Get an specific book with its `id`.
 /// You can not add specific parameters to this.
-Future<Book> getSpecificBook(String id) async {
+Future<Book> getSpecificBook(
+  String id, {
+  bool reschemeImageLinks = false,
+}) async {
   assert(id.isNotEmpty, 'You must provide a valid id');
   final q = 'https://www.googleapis.com/books/v1/volumes/${id.trim()}';
   final result = await http.get(Uri.parse(q));
   if (result.statusCode == 200) {
-    return Book.fromJson(jsonDecode(result.body) as Map<String, dynamic>);
+    return Book.fromJson(
+      jsonDecode(result.body) as Map<String, dynamic>,
+      reschemeImageLinks: reschemeImageLinks,
+    );
   } else {
     throw (result.body);
   }

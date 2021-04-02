@@ -8,6 +8,7 @@ void main(List<String> args) async {
     maxResults: 3,
     printType: PrintType.books,
     orderBy: OrderBy.relevance,
+    reschemeImageLinks: true,
   );
   books.forEach((book) {
     final info = book.info;

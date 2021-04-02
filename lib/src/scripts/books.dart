@@ -23,11 +23,17 @@ class Book {
   @override
   String toString() => '$id:${info.title}';
 
-  static Book fromJson(Map<String, dynamic> json) {
+  static Book fromJson(
+    Map<String, dynamic> json, {
+    bool reschemeImageLinks = false,
+  }) {
     return Book(
       id: json['id'],
       etag: json['etag'],
-      info: BookInfo.fromJson(json['volumeInfo']),
+      info: BookInfo.fromJson(
+        json['volumeInfo'],
+        reschemeImageLinks: reschemeImageLinks,
+      ),
       selfLink: Uri.parse(json['selfLink']),
     );
   }
@@ -117,13 +123,16 @@ class BookInfo {
     required this.industryIdentifier,
   });
 
-  static BookInfo fromJson(Map<String, dynamic> json) {
+  static BookInfo fromJson(
+    Map<String, dynamic> json, {
+    bool reschemeImageLinks = false,
+  }) {
     final publishedDateArray =
         ((json['publishedDate'] as String?) ?? '0000-00-00').split('-');
 
     // initialize datetime variable
-    DateTime? publishedDate = null;
-    if (publishedDateArray.length > 0) {
+    DateTime? publishedDate;
+    if (publishedDateArray.isNotEmpty) {
       // initialize date
       int year = int.parse(publishedDateArray[0]);
       int month = 1;
@@ -150,7 +159,12 @@ class BookInfo {
 
     final imageLinks = <String, Uri>{};
     (json['imageLinks'] as Map<String, dynamic>?)?.forEach((key, value) {
-      imageLinks.addAll({key: Uri.parse(value.toString())});
+      Uri uri = Uri.parse(value.toString());
+      if (reschemeImageLinks) {
+        if (uri.isScheme('HTTP'))
+          uri = Uri.parse(value.toString().replaceAll('http://', 'https://'));
+      }
+      imageLinks.addAll({key: uri});
     });
 
     return BookInfo(

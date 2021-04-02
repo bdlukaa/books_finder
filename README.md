@@ -46,13 +46,14 @@ final List<Book> books = await queryBooks(
 
 You can change a few parameters to make your query more specific:
 
-| Parameter    | Description                              | Nullable |
-| ------------ | ---------------------------------------- | -------- |
-| maxResults   | Set the max amount of results            | No       |
-| startIndex   | for pagination                           | No       |
-| langRestrict | Retrict the query to a specific language | Yes      |
-| orderBy      | Order the query by newest or relevance   | Yes      |
-| printType    | Filter by books, magazines or both       | Yes      |
+| Parameter          | Description                                | Nullable |
+| ------------------ | ------------------------------------------ | -------- |
+| maxResults         | Set the max amount of results              | No       |
+| startIndex         | for pagination                             | No       |
+| langRestrict       | Retrict the query to a specific language   | Yes      |
+| orderBy            | Order the query by newest or relevance     | Yes      |
+| printType          | Filter by books, magazines or both         | Yes      |
+| reschemeImageLinks | Rescheme image urls from `http` to `https` | No       |
 
 ### Books
 
