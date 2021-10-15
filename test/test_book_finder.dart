@@ -61,4 +61,34 @@ void main() {
     expect(book.info.industryIdentifier[0].type, 'ISSN');
     expect(book.info.industryIdentifier[0].identifier, '00287369');
   });
+
+  test('Get toJson', () async {
+    final Book book = await getSpecificBook('OugCAAAAMBAJ');
+    Map<String, dynamic> json = book.info.toJson();
+
+    expect(json['title'], 'New York Magazine');
+    expect(json['publisher'], 'New York Media, LLC');
+    expect(json['publishedDate'], DateTime(1997, 06, 02));
+    expect(json['rawPublishedDate'], '1997-06-02');
+    expect(json['authors'].length, 1);
+    expect(json['authors'][0], 'New York Media, LLC');
+    
+    // Cast List<T> to List<String>
+    List<String> catergories = json['categories'];
+    expect(json['categories'], []);
+    expect(catergories.length, 0);
+
+    expect(json['pageCount'], 142);
+    expect(json['language'], 'en');
+    expect(json['description'].isNotEmpty, true);
+    expect(json['maturityRating'], 'NOT_MATURE');
+    expect(json['contentVersion'], '0.0.2.0.preview.1');
+
+    // Cast List<T> to List<IndustryIdentifier>
+    List<IndustryIdentifier> industryIdentifiers = json['industryIdentifiers'];
+    expect(json['industryIdentifiers'].toString(), '[ISSN:00287369]');
+    expect(industryIdentifiers.length, 1);
+    expect(industryIdentifiers[0].type, 'ISSN');
+    expect(industryIdentifiers[0].identifier, '00287369');
+  });
 }

@@ -188,6 +188,24 @@ class BookInfo {
     );
   }
 
+  Map<String, dynamic> toJson() => {
+    'title': title,
+    'authors': authors,
+    'publisher': publisher,
+    'publishedDate': publishedDate,
+    'rawPublishedDate': rawPublishedDate,
+    'averageRating': averageRating,
+    'categories': categories,
+    'contentVersion': contentVersion,
+    'description': description,
+    'language': language,
+    'maturityRating': maturityRating,
+    'pageCount': pageCount,
+    'ratingsCount': ratingsCount,
+    'imageLinks': imageLinks,
+    'industryIdentifiers': industryIdentifier,
+  };
+
   @override
   String toString() {
     return '''title: $title
