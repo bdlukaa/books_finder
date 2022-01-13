@@ -10,15 +10,7 @@
     <a title="Github License">
       <img src="https://img.shields.io/github/license/bdlukaa/books_finder" />
     </a>
-    <a title="PRs are welcome">
-      <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" />
-    </a>
   <div>
-  <p align="center">
-    <a title="Buy me a coffee" href="https://www.buymeacoffee.com/bdlukaa">
-      <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=bdlukaa&button_colour=FF5F5F&font_colour=ffffff&font_family=Lato&outline_colour=000000&coffee_colour=FFDD00">
-    </a>
-  </p>
 </div>
 
 A library to help on the search for books on the [Google Books Api](https://developers.google.com/books/docs/v1/using).
