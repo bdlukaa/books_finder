@@ -51,7 +51,8 @@ Future<List<Book>> queryBooks(
 
   var q = 'https://www.googleapis.com/books/v1/volumes?q=' +
       '${query.trim().replaceAll(' ', '+')}' +
-      '&maxResults=$maxResults';
+      '&maxResults=$maxResults' +
+      '&startIndex=$startIndex';
 
   if (langRestrict != null) q += '&langRestrict=$langRestrict';
   if (orderBy != null) {
