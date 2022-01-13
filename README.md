@@ -76,6 +76,7 @@ final info = book.info;
 ## Acknowledgements
 
 - [@JimTim](https://github.com/JimTim) for industry identifiers and tests
+- [@Moomink](https://github.com/Moomink) for fixing `startIndex`
 
 ## Issues and feedback
 

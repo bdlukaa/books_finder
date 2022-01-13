@@ -1,6 +1,6 @@
 name: books_finder
 description: A library to help on the search for books on google books api
-version: 4.1.0
+version: 4.2.0
 repository: https://github.com/bdlukaa/books_finder
 
 environment:

@@ -1,5 +1,9 @@
 Date format: DD/MM/YYYY
 
+## 4.2.0 - [13/01/2022]
+
+- **FIX** `startIndex` is now correctly applied ([#10](https://github.com/bdlukaa/books_finder/pull/10))
+
 ## 4.1.0 - [02/03/2021]
 
 - **NEW** `reschemeImageLinks`
