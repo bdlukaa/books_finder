@@ -63,6 +63,9 @@ class BookInfo {
   /// The book title
   final String title;
 
+  //The book subtitle
+  final String subtitle;
+
   /// A list with the name of all the authors of the book
   final List<String> authors;
 
@@ -107,6 +110,7 @@ class BookInfo {
 
   const BookInfo({
     required this.title,
+    required this.subtitle,
     required this.authors,
     required this.publisher,
     required this.averageRating,
@@ -169,6 +173,7 @@ class BookInfo {
 
     return BookInfo(
       title: json['title'] ?? '',
+      subtitle: json['subtitle'] ?? '',
       authors: ((json['authors'] as List<dynamic>?) ?? []).toStringList(),
       publisher: json['publisher'] ?? '',
       averageRating: ((json['averageRating'] ?? 0) as num).toDouble(),
@@ -190,6 +195,7 @@ class BookInfo {
 
   Map<String, dynamic> toJson() => {
     'title': title,
+    'subtitle': subtitle,
     'authors': authors,
     'publisher': publisher,
     'publishedDate': publishedDate,
@@ -209,6 +215,7 @@ class BookInfo {
   @override
   String toString() {
     return '''title: $title
+    subtitle: $subtitle
     authors: $authors
     publisher: $publisher
     publishedDate: $publishedDate
