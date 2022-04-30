@@ -74,9 +74,9 @@ void main() {
     expect(json['authors'].first, 'New York Media, LLC');
 
     // Cast List<T> to List<String>
-    List<String> catergories = json['categories'];
+    List<String> categories = json['categories'];
     expect(json['categories'], []);
-    expect(catergories.length, 0);
+    expect(categories.length, 0);
 
     expect(json['pageCount'], 142);
     expect(json['language'], 'en');
@@ -89,5 +89,28 @@ void main() {
     expect(industryIdentifiers.length, 1);
     expect(industryIdentifiers.first['type'], 'ISSN');
     expect(industryIdentifiers[0]['identifier'], '00287369');
+  });
+
+  test('Get book with subtitle', () async {
+    final Book book = await getSpecificBook('aieWBrFeRtUC');
+
+    expect(book.info.title, 'Prototyping');
+    expect(book.info.subtitle, 'A Practitioner\'s Guide');
+    expect(book.info.publisher, 'Rosenfeld Media');
+    expect(book.info.publishedDate, DateTime(2009));
+    expect(book.info.rawPublishedDate, '2009');
+    expect(book.info.authors.length, 1);
+    expect(book.info.authors[0], 'Todd Zaki Warfel');
+    expect(book.info.categories.length, 3);
+    expect(book.info.categories[0],
+        'Computers / User Interfaces');
+    expect(book.info.pageCount, 197);
+    expect(book.info.language, 'en');
+    expect(book.info.description.isNotEmpty, true);
+    expect(book.info.maturityRating, 'NOT_MATURE');
+    expect(book.info.contentVersion, '0.1.5.0.preview.3');
+    expect(book.info.industryIdentifier[0].type, 'ISBN_10');
+    expect(book.info.industryIdentifier[0].identifier, '1933820217');
+
   });
 }

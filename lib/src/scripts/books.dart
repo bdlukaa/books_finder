@@ -135,6 +135,9 @@ class BookInfo {
   /// The book title
   final String title;
 
+  /// The book subtitle
+  final String subtitle;
+
   /// A list with the name of all the authors of the book
   final List<String> authors;
 
@@ -188,6 +191,7 @@ class BookInfo {
 
   const BookInfo({
     required this.title,
+    required this.subtitle,
     required this.authors,
     required this.publisher,
     required this.averageRating,
@@ -253,6 +257,7 @@ class BookInfo {
 
     return BookInfo(
       title: json['title'] ?? '',
+      subtitle: json['subtitle'] ?? '',
       authors: ((json['authors'] as List<dynamic>?) ?? []).toStringList(),
       publisher: json['publisher'] ?? '',
       averageRating: ((json['averageRating'] ?? 0) as num).toDouble(),
@@ -278,6 +283,7 @@ class BookInfo {
   Map<String, dynamic> toJson() {
     return {
       'title': title,
+      'subtitle': subtitle,
       'authors': authors,
       'publisher': publisher,
       'publishedDate': publishedDate,
@@ -301,7 +307,7 @@ class BookInfo {
 
   @override
   String toString() {
-    return 'BookInfo(title: $title, authors: $authors, publisher: $publisher, publishedDate: $publishedDate, rawPublishedDate: $rawPublishedDate, description: $description, industryIdentifiers: $industryIdentifiers, pageCount: $pageCount, categories: $categories, averageRating: $averageRating, ratingsCount: $ratingsCount, maturityRating: $maturityRating, contentVersion: $contentVersion, imageLinks: $imageLinks, language: $language, previewLink: $previewLink, infoLink: $infoLink, canonicalVolumeLink: $canonicalVolumeLink)';
+    return 'BookInfo(title: $title, subtitle: $subtitle authors: $authors, publisher: $publisher, publishedDate: $publishedDate, rawPublishedDate: $rawPublishedDate, description: $description, industryIdentifiers: $industryIdentifiers, pageCount: $pageCount, categories: $categories, averageRating: $averageRating, ratingsCount: $ratingsCount, maturityRating: $maturityRating, contentVersion: $contentVersion, imageLinks: $imageLinks, language: $language, previewLink: $previewLink, infoLink: $infoLink, canonicalVolumeLink: $canonicalVolumeLink)';
   }
 
   @override
@@ -311,6 +317,7 @@ class BookInfo {
 
     return other is BookInfo &&
         other.title == title &&
+        other.subtitle == subtitle &&
         collectionEquals(other.authors, authors) &&
         other.publisher == publisher &&
         other.publishedDate == publishedDate &&
@@ -333,6 +340,7 @@ class BookInfo {
   @override
   int get hashCode {
     return title.hashCode ^
+        subtitle.hashCode ^
         authors.hashCode ^
         publisher.hashCode ^
         publishedDate.hashCode ^
