@@ -63,7 +63,6 @@ Future<List<Book>> queryBooks(
   }
   final result = await http.get(Uri.parse(q));
   if (result.statusCode == 200) {
-    print(result.body);
     final books = <Book>[];
     final list = (jsonDecode(result.body))['items'] as List<dynamic>?;
     if (list == null) return [];
