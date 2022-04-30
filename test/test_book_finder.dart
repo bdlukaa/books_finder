@@ -86,7 +86,6 @@ void main() {
 
     List<Map<String, dynamic>> industryIdentifiers =
         json['industryIdentifiers'];
-    expect(json['industryIdentifierss'].toString(), '[ISSN:00287369]');
     expect(industryIdentifiers.length, 1);
     expect(industryIdentifiers.first['type'], 'ISSN');
     expect(industryIdentifiers[0]['identifier'], '00287369');

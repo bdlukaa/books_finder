@@ -82,8 +82,7 @@ class IndustryIdentifier {
   int get hashCode => type.hashCode ^ identifier.hashCode;
 
   @override
-  String toString() =>
-      'IndustryIdentifier(type: $type, identifier: $identifier)';
+  String toString() => '$type:$identifier';
 }
 
 class SaleInfo {
@@ -292,9 +291,8 @@ class BookInfo {
       'pageCount': pageCount,
       'ratingsCount': ratingsCount,
       'imageLinks': imageLinks,
-      'industryIdentifiers': industryIdentifiers.map(
-        (identifier) => identifier.toJson(),
-      ),
+      'industryIdentifiers':
+          industryIdentifiers.map((identifier) => identifier.toJson()).toList(),
       'previewLink': previewLink,
       'infoLink': infoLink,
       'canonicalVolumeLink': canonicalVolumeLink,
