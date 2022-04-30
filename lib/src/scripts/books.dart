@@ -1,5 +1,7 @@
 //  Copyright 2020 Bruno D'Luka
 
+import 'package:collection/collection.dart';
+
 import 'extensions.dart';
 
 class Book {
@@ -10,14 +12,18 @@ class Book {
   /// A self link containing more especific information
   final Uri? selfLink;
 
-  /// The informations about the book
+  /// The information about the book
   final BookInfo info;
+
+  /// The information about the book's sale info
+  final SaleInfo saleInfo;
 
   const Book({
     required this.id,
     this.etag,
     required this.info,
     this.selfLink,
+    required this.saleInfo,
   });
 
   @override
@@ -35,6 +41,7 @@ class Book {
         reschemeImageLinks: reschemeImageLinks,
       ),
       selfLink: Uri.parse(json['selfLink']),
+      saleInfo: SaleInfo.fromJson(json['saleInfo']),
     );
   }
 }
@@ -48,13 +55,78 @@ class IndustryIdentifier {
     required this.identifier,
   });
 
-  @override
-  String toString() => '$type:$identifier';
-
   static IndustryIdentifier fromJson(Map<String, dynamic> json) {
     return IndustryIdentifier(
       type: json['type'] ?? '',
       identifier: json['identifier'] ?? '',
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'type': type,
+      'identifier': identifier,
+    };
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is IndustryIdentifier &&
+        other.type == type &&
+        other.identifier == identifier;
+  }
+
+  @override
+  int get hashCode => type.hashCode ^ identifier.hashCode;
+
+  @override
+  String toString() => '$type:$identifier';
+}
+
+class SaleInfo {
+  final String country;
+  final String saleability;
+  final bool isEbook;
+
+  const SaleInfo({
+    required this.country,
+    required this.saleability,
+    required this.isEbook,
+  });
+
+  @override
+  String toString() =>
+      'SaleInfo(country: $country, saleability: $saleability, isEbook: $isEbook)';
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is SaleInfo &&
+        other.country == country &&
+        other.saleability == saleability &&
+        other.isEbook == isEbook;
+  }
+
+  @override
+  int get hashCode =>
+      country.hashCode ^ saleability.hashCode ^ isEbook.hashCode;
+
+  Map<String, dynamic> toJson() {
+    return {
+      'country': country,
+      'saleability': saleability,
+      'isEbook': isEbook,
+    };
+  }
+
+  factory SaleInfo.fromJson(Map<String, dynamic> map) {
+    return SaleInfo(
+      country: map['country'] ?? '',
+      saleability: map['saleability'] ?? '',
+      isEbook: map['isEbook'] ?? false,
     );
   }
 }
@@ -81,6 +153,9 @@ class BookInfo {
   /// The description of the book
   final String description;
 
+  /// The industryIdentifiers of the book (ISBN)
+  final List<IndustryIdentifier> industryIdentifiers;
+
   /// The amount of pages the book has
   final int pageCount;
 
@@ -105,8 +180,14 @@ class BookInfo {
   /// The original language of the book
   final String language;
 
-  /// The industryIdentifiers of the book (ISBN)
-  final List<IndustryIdentifier> industryIdentifier;
+  /// The volume preview link
+  final Uri previewLink;
+
+  /// The volume info link
+  final Uri infoLink;
+
+  /// The canonical volume link
+  final Uri canonicalVolumeLink;
 
   const BookInfo({
     required this.title,
@@ -117,6 +198,7 @@ class BookInfo {
     required this.categories,
     required this.contentVersion,
     required this.description,
+    required this.industryIdentifiers,
     required this.imageLinks,
     required this.language,
     required this.maturityRating,
@@ -124,7 +206,9 @@ class BookInfo {
     required this.publishedDate,
     required this.rawPublishedDate,
     required this.ratingsCount,
-    required this.industryIdentifier,
+    required this.previewLink,
+    required this.infoLink,
+    required this.canonicalVolumeLink,
   });
 
   static BookInfo fromJson(
@@ -187,48 +271,92 @@ class BookInfo {
       publishedDate: publishedDate,
       rawPublishedDate: (json['publishedDate'] as String?) ?? '',
       imageLinks: imageLinks,
-      industryIdentifier: ((json['industryIdentifiers'] ?? []) as List)
+      industryIdentifiers: ((json['industryIdentifiers'] ?? []) as List)
           .map((i) => IndustryIdentifier.fromJson(i))
           .toList(),
+      previewLink: Uri.parse(json['previewLink']),
+      infoLink: Uri.parse(json['infoLink']),
+      canonicalVolumeLink: Uri.parse(json['canonicalVolumeLink']),
     );
   }
 
-  Map<String, dynamic> toJson() => {
-    'title': title,
-    'subtitle': subtitle,
-    'authors': authors,
-    'publisher': publisher,
-    'publishedDate': publishedDate,
-    'rawPublishedDate': rawPublishedDate,
-    'averageRating': averageRating,
-    'categories': categories,
-    'contentVersion': contentVersion,
-    'description': description,
-    'language': language,
-    'maturityRating': maturityRating,
-    'pageCount': pageCount,
-    'ratingsCount': ratingsCount,
-    'imageLinks': imageLinks,
-    'industryIdentifiers': industryIdentifier,
-  };
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'subtitle': subtitle,
+      'authors': authors,
+      'publisher': publisher,
+      'publishedDate': publishedDate,
+      'rawPublishedDate': rawPublishedDate,
+      'averageRating': averageRating,
+      'categories': categories,
+      'contentVersion': contentVersion,
+      'description': description,
+      'language': language,
+      'maturityRating': maturityRating,
+      'pageCount': pageCount,
+      'ratingsCount': ratingsCount,
+      'imageLinks': imageLinks,
+      'industryIdentifiers':
+          industryIdentifiers.map((identifier) => identifier.toJson()).toList(),
+      'previewLink': previewLink,
+      'infoLink': infoLink,
+      'canonicalVolumeLink': canonicalVolumeLink,
+    };
+  }
 
   @override
   String toString() {
-    return '''title: $title
-    subtitle: $subtitle
-    authors: $authors
-    publisher: $publisher
-    publishedDate: $publishedDate
-    rawPublishedDate: $rawPublishedDate
-    averageRating: $averageRating
-    categories: $categories
-    contentVersion $contentVersion
-    description: $description
-    language: $language
-    maturityRating: $maturityRating
-    pageCount: $pageCount
-    ratingsCount: $ratingsCount
-    imageLinks: $imageLinks
-    industryIdentifiers: $industryIdentifier''';
+    return 'BookInfo(title: $title, subtitle: $subtitle authors: $authors, publisher: $publisher, publishedDate: $publishedDate, rawPublishedDate: $rawPublishedDate, description: $description, industryIdentifiers: $industryIdentifiers, pageCount: $pageCount, categories: $categories, averageRating: $averageRating, ratingsCount: $ratingsCount, maturityRating: $maturityRating, contentVersion: $contentVersion, imageLinks: $imageLinks, language: $language, previewLink: $previewLink, infoLink: $infoLink, canonicalVolumeLink: $canonicalVolumeLink)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    final collectionEquals = const DeepCollectionEquality().equals;
+
+    return other is BookInfo &&
+        other.title == title &&
+        other.subtitle == subtitle &&
+        collectionEquals(other.authors, authors) &&
+        other.publisher == publisher &&
+        other.publishedDate == publishedDate &&
+        other.rawPublishedDate == rawPublishedDate &&
+        other.description == description &&
+        collectionEquals(other.industryIdentifiers, industryIdentifiers) &&
+        other.pageCount == pageCount &&
+        collectionEquals(other.categories, categories) &&
+        other.averageRating == averageRating &&
+        other.ratingsCount == ratingsCount &&
+        other.maturityRating == maturityRating &&
+        other.contentVersion == contentVersion &&
+        collectionEquals(other.imageLinks, imageLinks) &&
+        other.language == language &&
+        other.previewLink == previewLink &&
+        other.infoLink == infoLink &&
+        other.canonicalVolumeLink == canonicalVolumeLink;
+  }
+
+  @override
+  int get hashCode {
+    return title.hashCode ^
+        subtitle.hashCode ^
+        authors.hashCode ^
+        publisher.hashCode ^
+        publishedDate.hashCode ^
+        rawPublishedDate.hashCode ^
+        description.hashCode ^
+        industryIdentifiers.hashCode ^
+        pageCount.hashCode ^
+        categories.hashCode ^
+        averageRating.hashCode ^
+        ratingsCount.hashCode ^
+        maturityRating.hashCode ^
+        contentVersion.hashCode ^
+        imageLinks.hashCode ^
+        language.hashCode ^
+        previewLink.hashCode ^
+        infoLink.hashCode ^
+        canonicalVolumeLink.hashCode;
   }
 }
