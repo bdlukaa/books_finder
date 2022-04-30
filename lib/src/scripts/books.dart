@@ -63,7 +63,7 @@ class BookInfo {
   /// The book title
   final String title;
 
-  //The book subtitle
+  /// The book subtitle
   final String subtitle;
 
   /// A list with the name of all the authors of the book
