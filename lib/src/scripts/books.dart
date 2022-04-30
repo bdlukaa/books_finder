@@ -57,6 +57,13 @@ class IndustryIdentifier {
       identifier: json['identifier'] ?? '',
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'type': type,
+      'identifier': identifier,
+    };
+  }
 }
 
 class BookInfo {
@@ -77,6 +84,9 @@ class BookInfo {
 
   /// The description of the book
   final String description;
+
+  /// The industryIdentifiers of the book (ISBN)
+  final List<IndustryIdentifier> industryIdentifiers;
 
   /// The amount of pages the book has
   final int pageCount;
@@ -102,8 +112,14 @@ class BookInfo {
   /// The original language of the book
   final String language;
 
-  /// The industryIdentifiers of the book (ISBN)
-  final List<IndustryIdentifier> industryIdentifier;
+  /// The volume preview link
+  final Uri previewLink;
+
+  /// The volume info link
+  final Uri infoLink;
+
+  /// The canonical volume link
+  final Uri canonicalVolumeLink;
 
   const BookInfo({
     required this.title,
@@ -113,6 +129,7 @@ class BookInfo {
     required this.categories,
     required this.contentVersion,
     required this.description,
+    required this.industryIdentifiers,
     required this.imageLinks,
     required this.language,
     required this.maturityRating,
@@ -120,7 +137,9 @@ class BookInfo {
     required this.publishedDate,
     required this.rawPublishedDate,
     required this.ratingsCount,
-    required this.industryIdentifier,
+    required this.previewLink,
+    required this.infoLink,
+    required this.canonicalVolumeLink,
   });
 
   static BookInfo fromJson(
@@ -182,29 +201,39 @@ class BookInfo {
       publishedDate: publishedDate,
       rawPublishedDate: (json['publishedDate'] as String?) ?? '',
       imageLinks: imageLinks,
-      industryIdentifier: ((json['industryIdentifiers'] ?? []) as List)
+      industryIdentifiers: ((json['industryIdentifiers'] ?? []) as List)
           .map((i) => IndustryIdentifier.fromJson(i))
           .toList(),
+      previewLink: Uri.parse(json['previewLink']),
+      infoLink: Uri.parse(json['infoLink']),
+      canonicalVolumeLink: Uri.parse(json['canonicalVolumeLink']),
     );
   }
 
-  Map<String, dynamic> toJson() => {
-    'title': title,
-    'authors': authors,
-    'publisher': publisher,
-    'publishedDate': publishedDate,
-    'rawPublishedDate': rawPublishedDate,
-    'averageRating': averageRating,
-    'categories': categories,
-    'contentVersion': contentVersion,
-    'description': description,
-    'language': language,
-    'maturityRating': maturityRating,
-    'pageCount': pageCount,
-    'ratingsCount': ratingsCount,
-    'imageLinks': imageLinks,
-    'industryIdentifiers': industryIdentifier,
-  };
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'authors': authors,
+      'publisher': publisher,
+      'publishedDate': publishedDate,
+      'rawPublishedDate': rawPublishedDate,
+      'averageRating': averageRating,
+      'categories': categories,
+      'contentVersion': contentVersion,
+      'description': description,
+      'language': language,
+      'maturityRating': maturityRating,
+      'pageCount': pageCount,
+      'ratingsCount': ratingsCount,
+      'imageLinks': imageLinks,
+      'industryIdentifiers': industryIdentifiers.map(
+        (identifier) => identifier.toJson(),
+      ),
+      'previewLink': previewLink,
+      'infoLink': infoLink,
+      'canonicalVolumeLink': canonicalVolumeLink,
+    };
+  }
 
   @override
   String toString() {
@@ -222,6 +251,9 @@ class BookInfo {
     pageCount: $pageCount
     ratingsCount: $ratingsCount
     imageLinks: $imageLinks
-    industryIdentifiers: $industryIdentifier''';
+    industryIdentifiers: $industryIdentifiers
+    previewLink: $previewLink
+    infoLink: $infoLink
+    canonicalVolumeLink: $canonicalVolumeLink''';
   }
 }
