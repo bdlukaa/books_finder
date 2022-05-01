@@ -1,5 +1,13 @@
 Date format: DD/MM/YYYY
 
+## 4.3.0 - [01/05/2022]
+
+- **MINOR BREAKING** Renamed `BookInfo.industryIdentifier` to `BookInfo.industryIdentifiers`
+- **NEW** Added the following properties to `BookInfo`:
+  - `.subtitle`, `.previewLink`, `.infoLink` and `.canonicalVolumeLink`
+- **NEW** Added `Book.saleInfo`
+- **NEW** Implemented equality in all classes
+
 ## 4.2.0 - [13/01/2022]
 
 - **FIX** `startIndex` is now correctly applied ([#10](https://github.com/bdlukaa/books_finder/pull/10))

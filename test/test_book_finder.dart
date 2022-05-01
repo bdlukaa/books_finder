@@ -109,8 +109,8 @@ void main() {
     expect(book.info.description.isNotEmpty, true);
     expect(book.info.maturityRating, 'NOT_MATURE');
     expect(book.info.contentVersion, '0.1.5.0.preview.3');
-    expect(book.info.industryIdentifier[0].type, 'ISBN_10');
-    expect(book.info.industryIdentifier[0].identifier, '1933820217');
+    expect(book.info.industryIdentifiers[0].type, 'ISBN_10');
+    expect(book.info.industryIdentifiers[0].identifier, '1933820217');
 
   });
 }
