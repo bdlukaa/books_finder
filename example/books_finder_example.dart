@@ -10,8 +10,8 @@ void main(List<String> args) async {
     orderBy: OrderBy.relevance,
     reschemeImageLinks: true,
   );
-  books.forEach((book) {
+  for (final book in books) {
     final info = book.info;
     print('$info\n');
-  });
+  }
 }

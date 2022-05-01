@@ -49,9 +49,9 @@ Future<List<Book>> queryBooks(
 
   // assert(startIndex <= maxResults);
 
-  var q = 'https://www.googleapis.com/books/v1/volumes?q=' +
-      '${query.trim().replaceAll(' ', '+')}' +
-      '&maxResults=$maxResults' +
+  var q = 'https://www.googleapis.com/books/v1/volumes?q='
+      '${query.trim().replaceAll(' ', '+')}'
+      '&maxResults=$maxResults'
       '&startIndex=$startIndex';
 
   if (langRestrict != null) q += '&langRestrict=$langRestrict';
@@ -66,9 +66,9 @@ Future<List<Book>> queryBooks(
     final books = <Book>[];
     final list = (jsonDecode(result.body))['items'] as List<dynamic>?;
     if (list == null) return [];
-    list.forEach((e) {
+    for (final e in list) {
       books.add(Book.fromJson(e, reschemeImageLinks: reschemeImageLinks));
-    });
+    }
     return books;
   } else {
     throw (result.body);

@@ -102,8 +102,7 @@ void main() {
     expect(book.info.authors.length, 1);
     expect(book.info.authors[0], 'Todd Zaki Warfel');
     expect(book.info.categories.length, 3);
-    expect(book.info.categories[0],
-        'Computers / User Interfaces');
+    expect(book.info.categories[0], 'Computers / User Interfaces');
     expect(book.info.pageCount, 197);
     expect(book.info.language, 'en');
     expect(book.info.description.isNotEmpty, true);
@@ -111,6 +110,5 @@ void main() {
     expect(book.info.contentVersion, '0.1.5.0.preview.3');
     expect(book.info.industryIdentifiers[0].type, 'ISBN_10');
     expect(book.info.industryIdentifiers[0].identifier, '1933820217');
-
   });
 }

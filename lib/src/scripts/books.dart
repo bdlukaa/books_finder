@@ -249,8 +249,9 @@ class BookInfo {
     (json['imageLinks'] as Map<String, dynamic>?)?.forEach((key, value) {
       Uri uri = Uri.parse(value.toString());
       if (reschemeImageLinks) {
-        if (uri.isScheme('HTTP'))
+        if (uri.isScheme('HTTP')) {
           uri = Uri.parse(value.toString().replaceAll('http://', 'https://'));
+        }
       }
       imageLinks.addAll({key: uri});
     });
