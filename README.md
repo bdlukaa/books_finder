@@ -58,6 +58,7 @@ final info = book.info;
 | Parameter                                       | Description                                 |
 | ----------------------------------------------- | ------------------------------------------- |
 | title (`String`)                                | Title of the book                           |
+| subtitle (`String`)                             | The subtile of the book                     |
 | authors (`List<String>`)                        | All the authors names                       |
 | publisher (`String`)                            | The publisher name                          |
 | publishedDate (`DateTime`)                      | The date it was published                   |
@@ -77,6 +78,7 @@ final info = book.info;
 
 - [@JimTim](https://github.com/JimTim) for industry identifiers and tests
 - [@Moomink](https://github.com/Moomink) for fixing `startIndex`
+- [@niklasenberg](https://github.com/niklasenberg) for `BookInfo.subtitle`
 
 ## Issues and feedback
 
