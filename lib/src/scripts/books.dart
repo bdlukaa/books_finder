@@ -1,7 +1,5 @@
 //  Copyright 2020 Bruno D'Luka
 
-import 'package:collection/collection.dart';
-
 import 'extensions.dart';
 
 class Book {
@@ -314,24 +312,23 @@ class BookInfo {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    final collectionEquals = const DeepCollectionEquality().equals;
 
     return other is BookInfo &&
         other.title == title &&
         other.subtitle == subtitle &&
-        collectionEquals(other.authors, authors) &&
+        other.authors == authors &&
         other.publisher == publisher &&
         other.publishedDate == publishedDate &&
         other.rawPublishedDate == rawPublishedDate &&
         other.description == description &&
-        collectionEquals(other.industryIdentifiers, industryIdentifiers) &&
+        other.industryIdentifiers == industryIdentifiers &&
         other.pageCount == pageCount &&
-        collectionEquals(other.categories, categories) &&
+        other.categories == categories &&
         other.averageRating == averageRating &&
         other.ratingsCount == ratingsCount &&
         other.maturityRating == maturityRating &&
         other.contentVersion == contentVersion &&
-        collectionEquals(other.imageLinks, imageLinks) &&
+        other.imageLinks == imageLinks &&
         other.language == language &&
         other.previewLink == previewLink &&
         other.infoLink == infoLink &&
