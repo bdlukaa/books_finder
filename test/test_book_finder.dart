@@ -111,4 +111,54 @@ void main() {
     expect(book.info.industryIdentifiers[0].type, 'ISBN_10');
     expect(book.info.industryIdentifiers[0].identifier, '1933820217');
   });
+
+  test('Test QueryTypes', () async {
+    ///  .intitle
+    List<Book> books = await queryBooks(
+      'harry potter and the philosopher\'s stone',
+      queryType: QueryType.intitle,
+      maxResults: 1,
+      printType: PrintType.books,
+      orderBy: OrderBy.relevance,
+    );
+
+    expect(books[0].info.title.toLowerCase(), "harry potter and the philosopher\'s stone");
+
+    /// .inauthor
+    books = await queryBooks(
+      'J. K. Rowling',
+      queryType: QueryType.inauthor,
+      maxResults: 1,
+      printType: PrintType.books,
+      orderBy: OrderBy.relevance,
+    );
+
+    expect(books[0].info.authors[0].toLowerCase(), "j. k. rowling");
+
+    /// .inpublisher
+    books = await queryBooks(
+      'Scholastic inc',
+      queryType: QueryType.inauthor,
+      maxResults: 1,
+      printType: PrintType.books,
+      orderBy: OrderBy.relevance,
+    );
+
+    expect(books[0].info.publisher.toLowerCase(), "scholastic");
+
+    /// .isbn
+    books = await queryBooks(
+      '9781408855959',
+      queryType: QueryType.isbn,
+      maxResults: 1,
+      printType: PrintType.books,
+      orderBy: OrderBy.relevance,
+    );
+
+    for(IndustryIdentifier id in books[0].info.industryIdentifiers){
+      if (id.type == 'ISBN_13'){
+        assert(id.identifier == '9781408855959');
+      }
+    }
+  });
 }
