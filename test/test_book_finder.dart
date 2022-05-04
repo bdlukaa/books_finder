@@ -123,7 +123,7 @@ void main() {
     );
 
     expect(books[0].info.title.toLowerCase(),
-        "harry potter and the philosopher\'s stone");
+        "harry potter and the philosopher's stone");
 
     /// .inauthor
     books = await queryBooks(
