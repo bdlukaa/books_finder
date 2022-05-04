@@ -122,7 +122,8 @@ void main() {
       orderBy: OrderBy.relevance,
     );
 
-    expect(books[0].info.title.toLowerCase(), "harry potter and the philosopher\'s stone");
+    expect(books[0].info.title.toLowerCase(),
+        "harry potter and the philosopher\'s stone");
 
     /// .inauthor
     books = await queryBooks(
@@ -155,8 +156,8 @@ void main() {
       orderBy: OrderBy.relevance,
     );
 
-    for(IndustryIdentifier id in books[0].info.industryIdentifiers){
-      if (id.type == 'ISBN_13'){
+    for (IndustryIdentifier id in books[0].info.industryIdentifiers) {
+      if (id.type == 'ISBN_13') {
         assert(id.identifier == '9781408855959');
       }
     }
