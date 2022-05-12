@@ -42,6 +42,16 @@ class Book {
       saleInfo: SaleInfo.fromJson(json['saleInfo']),
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'etag': etag,
+      'selfLink': selfLink.toString(),
+      'info': info.toJson(),
+      'saleInfo': saleInfo.toJson(),
+    };
+  }
 }
 
 class IndustryIdentifier {
