@@ -48,7 +48,7 @@ class Book {
       'id': id,
       'etag': etag,
       'selfLink': selfLink.toString(),
-      'info': info.toJson(),
+      'volumeInfo': info.toJson(),
       'saleInfo': saleInfo.toJson(),
     };
   }
