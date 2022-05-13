@@ -305,12 +305,12 @@ class BookInfo {
       'maturityRating': maturityRating,
       'pageCount': pageCount,
       'ratingsCount': ratingsCount,
-      'imageLinks': imageLinks,
+      'imageLinks': imageLinks.map((key, value) => MapEntry(key, value.toString())),
       'industryIdentifiers':
           industryIdentifiers.map((identifier) => identifier.toJson()).toList(),
-      'previewLink': previewLink,
-      'infoLink': infoLink,
-      'canonicalVolumeLink': canonicalVolumeLink,
+      'previewLink': previewLink.toString(),
+      'infoLink': infoLink.toString(),
+      'canonicalVolumeLink': canonicalVolumeLink.toString(),
     };
   }
 
