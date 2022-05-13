@@ -277,7 +277,7 @@ class BookInfo {
       maturityRating: json['maturityRating'] ?? '',
       pageCount: json['pageCount'] ?? 0,
       ratingsCount: json['ratingsCount'] ?? 0,
-      publishedDate: DateTime.tryParse(json['publishedDate'] as String),
+      publishedDate: DateTime.tryParse((json['publishedDate'] as String?) ?? ''),
       rawPublishedDate: (json['publishedDate'] as String?) ?? '',
       imageLinks: imageLinks,
       industryIdentifiers: ((json['industryIdentifiers'] ?? []) as List)
