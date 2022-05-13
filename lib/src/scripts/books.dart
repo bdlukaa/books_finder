@@ -295,7 +295,7 @@ class BookInfo {
       'subtitle': subtitle,
       'authors': authors,
       'publisher': publisher,
-      'publishedDate': publishedDate,
+      'publishedDate': publishedDate!.toString(),
       'rawPublishedDate': rawPublishedDate,
       'averageRating': averageRating,
       'categories': categories,
