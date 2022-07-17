@@ -12,6 +12,8 @@ export 'scripts/books.dart';
 /// `query` parameter must not be null and must not be empty.
 /// Spaces characters are allowed
 ///
+/// Set `queryType` to specify the search by a specific keyword
+///
 /// Set `langRestrict` to restrict the query to a
 /// specific language
 ///
@@ -38,6 +40,7 @@ export 'scripts/books.dart';
 ///
 Future<List<Book>> queryBooks(
   String query, {
+  QueryType? queryType,
   String? langRestrict,
   int maxResults = 10,
   OrderBy? orderBy,
@@ -49,7 +52,11 @@ Future<List<Book>> queryBooks(
 
   // assert(startIndex <= maxResults);
 
-  var q = 'https://www.googleapis.com/books/v1/volumes?q='
+  var url = 'https://www.googleapis.com/books/v1/volumes?q=';
+
+  if (queryType != null) url += queryType.name + ':';
+
+  var q = '$url'
       '${query.trim().replaceAll(' ', '+')}'
       '&maxResults=$maxResults'
       '&startIndex=$startIndex';
@@ -73,6 +80,30 @@ Future<List<Book>> queryBooks(
   } else {
     throw (result.body);
   }
+}
+
+/// Special keywords you can specify in the search terms to search by particular fields
+enum QueryType {
+  /// Returns results where the text following this keyword is found in the title.
+  intitle,
+
+  /// Returns results where the text following this keyword is found in the author.
+  inauthor,
+
+  /// Returns results where the text following this keyword is found in the publisher.
+  inpublisher,
+
+  /// Returns results where the text following this keyword is listed in the category list of the volume.
+  subject,
+
+  /// Returns results where the text following this keyword is the ISBN number.
+  isbn,
+
+  /// Returns results where the text following this keyword is the Library of Congress Control Number.
+  lccn,
+
+  /// Returns results where the text following this keyword is the Online Computer Library Center number.
+  oclc,
 }
 
 /// Order the query by `newest` or `relevance`
