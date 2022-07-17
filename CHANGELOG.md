@@ -1,5 +1,9 @@
 Date format: DD/MM/YYYY
 
+## [next]
+
+- Use `DateTime.tryParse` to parse the date ([#18](https://github.com/bdlukaa/books_finder/issues/18))
+
 ## 4.3.0 - [01/05/2022]
 
 - **MINOR BREAKING** Renamed `BookInfo.industryIdentifier` to `BookInfo.industryIdentifiers`
