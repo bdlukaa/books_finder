@@ -128,13 +128,17 @@ void main() {
     /// .inauthor
     books = await queryBooks(
       'J. K. Rowling',
+      langRestrict: 'en',
       queryType: QueryType.inauthor,
       maxResults: 1,
       printType: PrintType.books,
       orderBy: OrderBy.relevance,
     );
 
-    expect(books.first.info.authors.first.toLowerCase(), "j. k. rowling");
+    expect(
+      books.first.info.authors[0].toLowerCase().trim(),
+      'j. k. rowling',
+    );
 
     /// .inpublisher
     books = await queryBooks(
@@ -145,7 +149,7 @@ void main() {
       orderBy: OrderBy.relevance,
     );
 
-    expect(books.first.info.publisher.toLowerCase(), "scholastic");
+    expect(books.first.info.publisher.toLowerCase(), 'scholastic');
 
     /// .isbn
     books = await queryBooks(
