@@ -122,7 +122,7 @@ void main() {
       orderBy: OrderBy.relevance,
     );
 
-    expect(books[0].info.title.toLowerCase(),
+    expect(books.first.info.title.toLowerCase(),
         "harry potter and the philosopher's stone");
 
     /// .inauthor
@@ -134,8 +134,8 @@ void main() {
       orderBy: OrderBy.relevance,
     );
 
-    if (books.isNotEmpty) {
-      expect(books[0].info.authors[0].toLowerCase(), "j. k. rowling");
+    if (books.isNotEmpty && books.first.info.authors.isNotEmpty) {
+      expect(books.first.info.authors.first.toLowerCase(), "j. k. rowling");
     }
 
     /// .inpublisher
@@ -149,7 +149,7 @@ void main() {
 
     if (books.isNotEmpty) {
       expect(
-          books[0].info.publisher.toLowerCase(), "scholastic early learners");
+          books.first.info.publisher.toLowerCase(), "scholastic early learners");
     }
 
     /// .isbn
@@ -162,7 +162,7 @@ void main() {
     );
 
     if (books.isNotEmpty) {
-      for (IndustryIdentifier id in books[0].info.industryIdentifiers) {
+      for (IndustryIdentifier id in books.first.info.industryIdentifiers) {
         if (id.type == 'ISBN_13') {
           assert(id.identifier == '9781408855959');
         }
