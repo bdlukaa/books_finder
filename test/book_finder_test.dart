@@ -134,7 +134,9 @@ void main() {
       orderBy: OrderBy.relevance,
     );
 
-    expect(books[0].info.authors[0].toLowerCase(), "j. k. rowling");
+    if (books.isNotEmpty) {
+      expect(books[0].info.authors[0].toLowerCase(), "j. k. rowling");
+    }
 
     /// .inpublisher
     books = await queryBooks(
@@ -145,7 +147,10 @@ void main() {
       orderBy: OrderBy.relevance,
     );
 
-    expect(books[0].info.publisher.toLowerCase(), "scholastic early learners");
+    if (books.isNotEmpty) {
+      expect(
+          books[0].info.publisher.toLowerCase(), "scholastic early learners");
+    }
 
     /// .isbn
     books = await queryBooks(
@@ -156,9 +161,11 @@ void main() {
       orderBy: OrderBy.relevance,
     );
 
-    for (IndustryIdentifier id in books[0].info.industryIdentifiers) {
-      if (id.type == 'ISBN_13') {
-        assert(id.identifier == '9781408855959');
+    if (books.isNotEmpty) {
+      for (IndustryIdentifier id in books[0].info.industryIdentifiers) {
+        if (id.type == 'ISBN_13') {
+          assert(id.identifier == '9781408855959');
+        }
       }
     }
   });
