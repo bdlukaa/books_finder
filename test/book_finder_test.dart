@@ -148,8 +148,8 @@ void main() {
     );
 
     if (books.isNotEmpty) {
-      expect(
-          books.first.info.publisher.toLowerCase(), "scholastic early learners");
+      expect(books.first.info.publisher.toLowerCase(),
+          "scholastic early learners");
     }
 
     /// .isbn
