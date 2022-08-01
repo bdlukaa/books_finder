@@ -42,6 +42,16 @@ class Book {
       saleInfo: SaleInfo.fromJson(json['saleInfo']),
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'etag': etag,
+      'selfLink': selfLink.toString(),
+      'volumeInfo': info.toJson(),
+      'saleInfo': saleInfo.toJson(),
+    };
+  }
 }
 
 class IndustryIdentifier {
@@ -213,35 +223,35 @@ class BookInfo {
     Map<String, dynamic> json, {
     bool reschemeImageLinks = false,
   }) {
-    final publishedDateArray =
-        ((json['publishedDate'] as String?) ?? '0000-00-00').split('-');
+    // final publishedDateArray =
+    //     ((json['publishedDate'] as String?) ?? '0000-00-00').split('-');
 
-    // initialize datetime variable
-    DateTime? publishedDate;
-    if (publishedDateArray.isNotEmpty) {
-      // initialize date
-      int year = int.parse(publishedDateArray[0]);
-      int month = 1;
-      int day = 1;
+    // // initialize datetime variable
+    // DateTime? publishedDate;
+    // if (publishedDateArray.isNotEmpty) {
+    //   // initialize date
+    //   int year = int.parse(publishedDateArray[0]);
+    //   int month = 1;
+    //   int day = 1;
 
-      // now test the date string
-      if (publishedDateArray.length == 1) {
-        // assume we have only the year
-        year = int.parse(publishedDateArray[0]);
-      }
-      if (publishedDateArray.length == 2) {
-        // assume we have the year and maybe the month (this could be just a speculative case)
-        year = int.parse(publishedDateArray[0]);
-        month = int.parse(publishedDateArray[1]);
-      }
-      if (publishedDateArray.length == 3) {
-        // assume we have year-month-day
-        year = int.parse(publishedDateArray[0]);
-        month = int.parse(publishedDateArray[1]);
-        day = int.parse(publishedDateArray[2]);
-      }
-      publishedDate = DateTime(year, month, day);
-    }
+    //   // now test the date string
+    //   if (publishedDateArray.length == 1) {
+    //     // assume we have only the year
+    //     year = int.parse(publishedDateArray[0]);
+    //   }
+    //   if (publishedDateArray.length == 2) {
+    //     // assume we have the year and maybe the month (this could be just a speculative case)
+    //     year = int.parse(publishedDateArray[0]);
+    //     month = int.parse(publishedDateArray[1]);
+    //   }
+    //   if (publishedDateArray.length == 3) {
+    //     // assume we have year-month-day
+    //     year = int.parse(publishedDateArray[0]);
+    //     month = int.parse(publishedDateArray[1]);
+    //     day = int.parse(publishedDateArray[2]);
+    //   }
+    //   publishedDate = DateTime(year, month, day);
+    // }
 
     final imageLinks = <String, Uri>{};
     (json['imageLinks'] as Map<String, dynamic>?)?.forEach((key, value) {
@@ -267,7 +277,7 @@ class BookInfo {
       maturityRating: json['maturityRating'] ?? '',
       pageCount: json['pageCount'] ?? 0,
       ratingsCount: json['ratingsCount'] ?? 0,
-      publishedDate: publishedDate,
+      publishedDate: DateTime.tryParse((json['publishedDate'] as String?) ?? ''),
       rawPublishedDate: (json['publishedDate'] as String?) ?? '',
       imageLinks: imageLinks,
       industryIdentifiers: ((json['industryIdentifiers'] ?? []) as List)
@@ -285,7 +295,7 @@ class BookInfo {
       'subtitle': subtitle,
       'authors': authors,
       'publisher': publisher,
-      'publishedDate': publishedDate,
+      'publishedDate': publishedDate!.toString(),
       'rawPublishedDate': rawPublishedDate,
       'averageRating': averageRating,
       'categories': categories,
@@ -295,12 +305,12 @@ class BookInfo {
       'maturityRating': maturityRating,
       'pageCount': pageCount,
       'ratingsCount': ratingsCount,
-      'imageLinks': imageLinks,
+      'imageLinks': imageLinks.map((key, value) => MapEntry(key, value.toString())),
       'industryIdentifiers':
           industryIdentifiers.map((identifier) => identifier.toJson()).toList(),
-      'previewLink': previewLink,
-      'infoLink': infoLink,
-      'canonicalVolumeLink': canonicalVolumeLink,
+      'previewLink': previewLink.toString(),
+      'infoLink': infoLink.toString(),
+      'canonicalVolumeLink': canonicalVolumeLink.toString(),
     };
   }
 
