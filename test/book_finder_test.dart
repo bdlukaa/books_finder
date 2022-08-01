@@ -145,7 +145,7 @@ void main() {
       orderBy: OrderBy.relevance,
     );
 
-    expect(books[0].info.publisher.toLowerCase(), "scholastic");
+    expect(books[0].info.publisher.toLowerCase(), "scholastic early learners");
 
     /// .isbn
     books = await queryBooks(
