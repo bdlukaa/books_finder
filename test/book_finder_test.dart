@@ -19,17 +19,17 @@ void main() {
     expect(book.info.publishedDate, DateTime(2021, 02, 09));
     expect(book.info.rawPublishedDate, '2021-02-09');
     expect(book.info.authors.length, 1);
-    expect(book.info.authors[0], 'Daisy Sunshine');
+    expect(book.info.authors.first, 'Daisy Sunshine');
     expect(book.info.categories.length, 4);
-    expect(book.info.categories[0],
+    expect(book.info.categories.first,
         'Juvenile Fiction / Animals / Dragons, Unicorns & Mythical');
     expect(book.info.pageCount, 112);
     expect(book.info.language, 'en');
     expect(book.info.description.isNotEmpty, true);
     expect(book.info.maturityRating, 'NOT_MATURE');
     expect(book.info.contentVersion, 'preview-1.0.0');
-    expect(book.info.industryIdentifiers[0].type, 'ISBN_10');
-    expect(book.info.industryIdentifiers[0].identifier, '1534461655');
+    expect(book.info.industryIdentifiers.first.type, 'ISBN_10');
+    expect(book.info.industryIdentifiers.first.identifier, '1534461655');
   });
 
   test('Get magazines', () async {
@@ -40,7 +40,7 @@ void main() {
       orderBy: OrderBy.relevance,
     );
     expect(magazines.length, 3);
-    expect(magazines[0].info.industryIdentifiers.length, 0);
+    expect(magazines.first.info.industryIdentifiers.length, 0);
   });
 
   test('Get magazine with special id', () async {
@@ -50,7 +50,7 @@ void main() {
     expect(book.info.publishedDate, DateTime(1997, 06, 02));
     expect(book.info.rawPublishedDate, '1997-06-02');
     expect(book.info.authors.length, 1);
-    expect(book.info.authors[0], 'New York Media, LLC');
+    expect(book.info.authors.first, 'New York Media, LLC');
     expect(book.info.categories.length, 0);
     expect(book.info.pageCount, 142);
     expect(book.info.language, 'en');
@@ -58,8 +58,8 @@ void main() {
     expect(book.info.maturityRating, 'NOT_MATURE');
     expect(book.info.contentVersion, '0.0.2.0.preview.1');
     expect(book.info.industryIdentifiers.length, 1);
-    expect(book.info.industryIdentifiers[0].type, 'ISSN');
-    expect(book.info.industryIdentifiers[0].identifier, '00287369');
+    expect(book.info.industryIdentifiers.first.type, 'ISSN');
+    expect(book.info.industryIdentifiers.first.identifier, '00287369');
   });
 
   test('Get toJson', () async {
@@ -88,7 +88,7 @@ void main() {
         json['industryIdentifiers'];
     expect(industryIdentifiers.length, 1);
     expect(industryIdentifiers.first['type'], 'ISSN');
-    expect(industryIdentifiers[0]['identifier'], '00287369');
+    expect(industryIdentifiers.first['identifier'], '00287369');
   });
 
   test('Get book with subtitle', () async {
@@ -100,16 +100,16 @@ void main() {
     expect(book.info.publishedDate, DateTime(2009));
     expect(book.info.rawPublishedDate, '2009');
     expect(book.info.authors.length, 1);
-    expect(book.info.authors[0], 'Todd Zaki Warfel');
+    expect(book.info.authors.first, 'Todd Zaki Warfel');
     expect(book.info.categories.length, 3);
-    expect(book.info.categories[0], 'Computers / User Interfaces');
+    expect(book.info.categories.first, 'Computers / User Interfaces');
     expect(book.info.pageCount, 197);
     expect(book.info.language, 'en');
     expect(book.info.description.isNotEmpty, true);
     expect(book.info.maturityRating, 'NOT_MATURE');
     expect(book.info.contentVersion, '0.1.5.0.preview.3');
-    expect(book.info.industryIdentifiers[0].type, 'ISBN_10');
-    expect(book.info.industryIdentifiers[0].identifier, '1933820217');
+    expect(book.info.industryIdentifiers.first.type, 'ISBN_10');
+    expect(book.info.industryIdentifiers.first.identifier, '1933820217');
   });
 
   test('Test QueryTypes', () async {
@@ -122,7 +122,7 @@ void main() {
       orderBy: OrderBy.relevance,
     );
 
-    expect(books[0].info.title.toLowerCase(),
+    expect(books.first.info.title.toLowerCase(),
         "harry potter and the philosopher's stone");
 
     /// .inauthor
@@ -134,7 +134,9 @@ void main() {
       orderBy: OrderBy.relevance,
     );
 
-    expect(books[0].info.authors[0].toLowerCase(), "j. k. rowling");
+    if (books.isNotEmpty && books.first.info.authors.isNotEmpty) {
+      expect(books.first.info.authors.first.toLowerCase(), "j. k. rowling");
+    }
 
     /// .inpublisher
     books = await queryBooks(
@@ -145,7 +147,10 @@ void main() {
       orderBy: OrderBy.relevance,
     );
 
-    expect(books[0].info.publisher.toLowerCase(), "scholastic");
+    if (books.isNotEmpty) {
+      expect(books.first.info.publisher.toLowerCase(),
+          "scholastic early learners");
+    }
 
     /// .isbn
     books = await queryBooks(
@@ -156,9 +161,11 @@ void main() {
       orderBy: OrderBy.relevance,
     );
 
-    for (IndustryIdentifier id in books[0].info.industryIdentifiers) {
-      if (id.type == 'ISBN_13') {
-        assert(id.identifier == '9781408855959');
+    if (books.isNotEmpty) {
+      for (IndustryIdentifier id in books.first.info.industryIdentifiers) {
+        if (id.type == 'ISBN_13') {
+          assert(id.identifier == '9781408855959');
+        }
       }
     }
   });

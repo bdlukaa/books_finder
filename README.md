@@ -30,6 +30,7 @@ To query books, just call the function `queryBooks`:
 ```dart
 final List<Book> books = await queryBooks(
  'twilight',
+ queryType: QueryType.intitle,
  maxResults: 3,
  printType: PrintType.books,
  orderBy: OrderBy.relevance,
@@ -40,6 +41,7 @@ You can change a few parameters to make your query more specific:
 
 | Parameter          | Description                                | Nullable |
 | ------------------ | ------------------------------------------ | -------- |
+| queryType          | Keywords to search in particular fields    | Yes      |
 | maxResults         | Set the max amount of results              | No       |
 | startIndex         | for pagination                             | No       |
 | langRestrict       | Retrict the query to a specific language   | Yes      |
@@ -78,7 +80,7 @@ final info = book.info;
 
 - [@JimTim](https://github.com/JimTim) for industry identifiers and tests
 - [@Moomink](https://github.com/Moomink) for fixing `startIndex`
-- [@niklasenberg](https://github.com/niklasenberg) for `BookInfo.subtitle`
+- [@niklasenberg](https://github.com/niklasenberg) for `BookInfo.subtitle` and `QueryType`
 
 ## Issues and feedback
 
