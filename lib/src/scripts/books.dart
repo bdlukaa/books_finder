@@ -166,7 +166,7 @@ class BookInfo {
   /// How many people rated the book
   final int ratingsCount;
 
-  /// Wether the book is mature or not
+  /// Whether the book is mature or not
   final String maturityRating;
 
   /// The content version
