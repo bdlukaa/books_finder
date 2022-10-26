@@ -27,7 +27,8 @@ void main() {
     expect(book.info.language, 'en');
     expect(book.info.description.isNotEmpty, true);
     expect(book.info.maturityRating, 'NOT_MATURE');
-    expect(book.info.contentVersion, 'preview-1.0.0');
+
+    expect(book.info.contentVersion, '0.0.1.0.preview.0');
     expect(book.info.industryIdentifiers.first.type, 'ISBN_10');
     expect(book.info.industryIdentifiers.first.identifier, '1534461655');
   });
@@ -123,7 +124,7 @@ void main() {
     );
 
     expect(books.first.info.title.toLowerCase(),
-        "harry potter and the philosopher's stone");
+        "harry potter and the sorcerers stone");
 
     /// .inauthor
     books = await queryBooks(
@@ -148,8 +149,7 @@ void main() {
     );
 
     if (books.isNotEmpty) {
-      expect(books.first.info.publisher.toLowerCase(),
-          "scholastic early learners");
+      expect(books.first.info.publisher.toLowerCase(), "cartwheel books");
     }
 
     /// .isbn
