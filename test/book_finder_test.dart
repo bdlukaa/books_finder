@@ -128,6 +128,7 @@ void main() {
     /// .inauthor
     books = await queryBooks(
       'J. K. Rowling',
+      langRestrict: 'en',
       queryType: QueryType.inauthor,
       maxResults: 1,
       printType: PrintType.books,
@@ -141,7 +142,7 @@ void main() {
     /// .inpublisher
     books = await queryBooks(
       'Scholastic inc',
-      queryType: QueryType.inauthor,
+      queryType: QueryType.inpublisher,
       maxResults: 1,
       printType: PrintType.books,
       orderBy: OrderBy.relevance,
