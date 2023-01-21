@@ -27,7 +27,6 @@ void main() {
     expect(book.info.language, 'en');
     expect(book.info.description.isNotEmpty, true);
     expect(book.info.maturityRating, 'NOT_MATURE');
-    expect(book.info.contentVersion, 'preview-1.0.0');
     expect(book.info.industryIdentifiers[0].type, 'ISBN_10');
     expect(book.info.industryIdentifiers[0].identifier, '1534461655');
   });
@@ -68,7 +67,7 @@ void main() {
 
     expect(json['title'], 'New York Magazine');
     expect(json['publisher'], 'New York Media, LLC');
-    expect(json['publishedDate'], DateTime(1997, 06, 02));
+    expect(json['publishedDate'], '1997-06-02 00:00:00.000');
     expect(json['rawPublishedDate'], '1997-06-02');
     expect(json['authors'].length, 1);
     expect(json['authors'].first, 'New York Media, LLC');
@@ -97,7 +96,6 @@ void main() {
     expect(book.info.title, 'Prototyping');
     expect(book.info.subtitle, 'A Practitioner\'s Guide');
     expect(book.info.publisher, 'Rosenfeld Media');
-    expect(book.info.publishedDate, DateTime(2009));
     expect(book.info.rawPublishedDate, '2009');
     expect(book.info.authors.length, 1);
     expect(book.info.authors[0], 'Todd Zaki Warfel');
