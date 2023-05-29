@@ -124,7 +124,7 @@ void main() {
     );
 
     expect(books.first.info.title.toLowerCase(),
-        "harry potter and the sorcerers stone");
+        "harry potter and the philosopher\'s stone - gryffindor edition");
 
     /// .inauthor
     books = await queryBooks(
@@ -142,14 +142,15 @@ void main() {
     /// .inpublisher
     books = await queryBooks(
       'Scholastic inc',
-      queryType: QueryType.inauthor,
+      queryType: QueryType.inpublisher,
       maxResults: 1,
       printType: PrintType.books,
       orderBy: OrderBy.relevance,
     );
 
     if (books.isNotEmpty) {
-      expect(books.first.info.publisher.toLowerCase(), "cartwheel books");
+      expect(books.first.info.publisher.toLowerCase(),
+          "scholastic teaching resources");
     }
 
     /// .isbn
