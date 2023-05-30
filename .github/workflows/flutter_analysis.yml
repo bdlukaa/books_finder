@@ -12,22 +12,19 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Install Flutter
-        uses: subosito/flutter-action@master
-        with:
-          channel: stable
+      - uses: dart-lang/setup-dart@v1
 
       - name: Install dependencies
-        run: flutter pub get
+        run: dart pub get
 
       - name: Check formatting
-        run: flutter format --set-exit-if-changed .
+        run: dart format --set-exit-if-changed .
 
       - name: Run analysis
-        run: flutter analyze
+        run: dart analyze
 
       - name: Verify package health
-        run: flutter pub publish --dry-run
+        run: dart pub publish --dry-run
 
       - name: Run tests
-        run: flutter test
+        run: dart test
