@@ -1,5 +1,9 @@
 Date format: DD/MM/YYYY
 
+## 4.4.0 - [30/05/2023]
+
+- **NEW** `queryBook.queryType` ([#15](https://github.com/bdlukaa/books_finder/pull/15))
+
 ## 4.3.0 - [01/05/2022]
 
 - **MINOR BREAKING** Renamed `BookInfo.industryIdentifier` to `BookInfo.industryIdentifiers`
